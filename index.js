@@ -1,6 +1,7 @@
 //подключаем библеотеки 
 const express = require('express')
 const mongoose = require('mongoose')
+const path = require("path")
 const expressHandlebars = require('express-handlebars')
 const router = require('./routes/route')
 
@@ -30,7 +31,7 @@ app.set('views', 'views')
 app.use(express.urlencoded({
     extended: true
 }))
-
+app.use(express.static(path.join(__dirname, 'style')))
 // работа с мидлварами( роутеры )
 app.use(router)
 

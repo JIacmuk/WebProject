@@ -1,5 +1,16 @@
-<h2>Значения</h2>
 
+
+<form action="/" method="post">
+    <h2>Создать значение БД</h2>
+
+    <div class="input-field">
+        <input type="text" name="value">
+    </div>
+    <button type="submit">Создать</button>
+</form>
+
+
+<h2>Значения:</h2>
 {{#if DBvalues.length}}
 <ul>
     {{#each DBvalues}}
@@ -13,11 +24,3 @@
 <p>Нет данных</p>
 {{/if}}
 
-<form action="/" method="post">
-    <h2>Создать значение БД</h2>
-
-    <div class="input-field">
-        <input type="text" name="value">
-    </div>
-    <button type="submit">Создать</button>
-</form>

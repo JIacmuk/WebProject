@@ -7,7 +7,7 @@ const TestDB = require('../models/model')
 
 router.get('/', async (req, res) => {
     //получаем все значения 
-    const DBvalues = await TestDB.find({})
+    const DBvalues = await TestDB.find({}).lean()
     res.render('index', {
         DBvalues
     })
