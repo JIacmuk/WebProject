@@ -1,8 +1,24 @@
 const express = require('express')
 const router = express.Router()
 
-router.get('/', (req, res) => {
-    res.render('index')
+//подключаем модель 
+const TestDB = require('../models/model')
+
+
+router.get('/', async (req, res) => {
+    //получаем все значения 
+    const DBvalues = await TestDB.find({})
+    res.render('index', {
+        DBvalues
+    })
+})
+
+router.post('/', async (req, res) => {
+    const value = new TestDB({
+        title: req.body.value
+    })
+    await value.save()
+    res.redirect('/')
 }) 
 
 

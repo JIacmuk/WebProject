@@ -1,1 +1,23 @@
-<h2>Index page</h2>
+<h2>Значения</h2>
+
+{{#if DBvalues.length}}
+<ul>
+    {{#each DBvalues}}
+    <li>
+        <span>{{title}}</span>
+    </li>
+    {{/each}}
+</ul>
+
+{{else}}
+<p>Нет данных</p>
+{{/if}}
+
+<form action="/" method="post">
+    <h2>Создать значение БД</h2>
+
+    <div class="input-field">
+        <input type="text" name="value">
+    </div>
+    <button type="submit">Создать</button>
+</form>

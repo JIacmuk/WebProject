@@ -23,6 +23,14 @@ app.engine('hbs', handlebars.engine)
 app.set('view engine' , "hbs")
 app.set('views', 'views')
 
+
+// работа с мидлварами
+
+// работа с файлами
+app.use(express.urlencoded({
+    extended: true
+}))
+
 // работа с мидлварами( роутеры )
 app.use(router)
 
