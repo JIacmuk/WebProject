@@ -1,0 +1,4 @@
+{
+    "port": 3000,
+    "dbUri": "mongodb+srv://Floppin:20030126500Ji@cluster0.ldfd8x4.mongodb.net/test"
+}

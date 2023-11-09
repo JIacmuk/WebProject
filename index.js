@@ -5,9 +5,11 @@ const expressHandlebars = require('express-handlebars')
 const router = require('./routes/route')
 
 
-const PORT = process.env.PORT || 3000
-const password = "20030126500Ji"
-const name = "Floppin"
+var config = require('./config.json');
+const PORT = process.env.PORT || config.port;
+// const password = "20030126500Ji"
+// const name = "Floppin"
+
 
 //работа с либами
 const app = express()
@@ -26,9 +28,10 @@ app.use(router)
 
 async function init() {
     try {
+        console.log(config);
         //Подключаем бд 
         await mongoose
-            .connect(`mongodb+srv://${name}:${password}@cluster0.ldfd8x4.mongodb.net/test`, {})
+            .connect(config.dbUri, {})
             .then(() => console.log( 'Database Connected' ))
 
         //подключаем сервер для прослушивания
