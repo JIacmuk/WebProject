@@ -9,7 +9,6 @@ const schema = new Schema({
         type: Boolean,
         default: false
     }
-
 })
 
 module.exports = model('Test', schema)

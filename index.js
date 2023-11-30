@@ -1,57 +1,43 @@
+//подключаем использование конфига
+require('dotenv').config()
+
 //подключаем библеотеки 
 const express = require('express')
 const mongoose = require('mongoose')
-const path = require("path")
-const expressHandlebars = require('express-handlebars')
 const router = require('./routes/route')
+const authRouter = require('./routes/authRouter')
 
+//подключаем корсы 
+const cors = require('cors')
 
-var config = require('./config.json');
-const PORT = process.env.PORT || config.port;
-// const password = "20030126500Ji"
-// const name = "Floppin"
+const PORT = process.env.PORT || 3333;
 
-
-//работа с либами
 const app = express()
-const handlebars = expressHandlebars.create({
-    defaultLayout: 'main',
-    extname: 'hbs'
-})
 
-//движок для работы с шаблонизатором
-app.engine('hbs', handlebars.engine)
-app.set('view engine' , "hbs")
-app.set('views', 'views')
-
-
-// работа с мидлварами
-
+app.use(cors({
+    credentials: true,
+    origin: process.env.CLIENT_URL
+}));
 // работа с файлами
-app.use(express.urlencoded({
-    extended: true
-}))
-app.use(express.static(path.join(__dirname, 'style')))
+app.use(express.json())
 // работа с мидлварами( роутеры )
-app.use(router)
+
+app.use('/api', router)
+app.use('/auth', authRouter)
 
 async function init() {
     try {
-        console.log(config);
         //Подключаем бд 
         await mongoose
-            .connect(config.dbUri, {})
+            .connect(process.env.DB_URL, {})
             .then(() => console.log( 'Database Connected' ))
-
         //подключаем сервер для прослушивания
         app.listen(PORT, () => {
             console.log("Server Starting")
         })
     }
-
     catch (error) {
         console.log(error)
     }
 }
-
 init()
