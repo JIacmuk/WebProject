@@ -6,7 +6,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const router = require('./routes/route')
 const authRouter = require('./routes/authRouter')
-
+const userRouter = require('./routes/userRouter')
 //подключаем корсы 
 const cors = require('cors')
 
@@ -24,6 +24,7 @@ app.use(express.json())
 
 app.use('/api', router)
 app.use('/auth', authRouter)
+app.use('/user', userRouter)
 
 async function init() {
     try {

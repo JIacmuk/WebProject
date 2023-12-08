@@ -5,6 +5,9 @@ const authRouter = express.Router()
 const authController = require('../controlers/authController')
 //подключаем проверку входных данных - валидатор
 const {check} = require("express-validator")
+//подключаем проверки аутентификации и роли
+const authMiddleware = require('../middlewaree/authMiddlewaree')
+const roleMiddleware = require('../middlewaree/roleMiddlewaree')
 
 
 authRouter.post('/registration', 
@@ -14,6 +17,6 @@ authRouter.post('/registration',
     check('password', "Пароль должен быть больше 4 и меньше 20 символов").isLength({min: 4, max: 20}),
     authController.registration)
 authRouter.post('/login', authController.login)
-authRouter.get('/users', authController.getUsers)
+authRouter.get('/users', authMiddleware, authController.getUsers)
 
 module.exports = authRouter
