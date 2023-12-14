@@ -58,6 +58,7 @@ class authController {
     async login(req, res) {
         try {
             const {email, password} = req.body
+            console.log({email})
             const user = await User.findOne({email})
             if (!user) {
                 return res.status(400).json({message: `Пользователь не найден`})
